@@ -605,26 +605,41 @@
 
     </div>
   </div>
-</section>  <!-- VibeSpace -->
-  <section id="vibespace" class="section">
-    <div class="container">
-      <div class="vibespace reveal">
-        <div class="vibespace-content">
-          <p class="eyebrow" style="color: var(--primary); margin-bottom: 12px;">Coming Soon</p>
-          <h2>Introducing VibeSpace</h2>
-          <p>A calm corner of the internet where people can write, share feelings, give advice, and support each other through blogs and conversations.</p>
-          <div class="feature-pills">
-            <span class="pill">Create Posts</span>
-            <span class="pill">Share Thoughts</span>
-            <span class="pill">Comment & Connect</span>
-            <span class="pill">Personal Blogs</span>
+</section> 
+  <!-- VibeSpace Waitlist -->
+<section id="vibespace" class="section">
+  <div class="container">
+    <div class="vibespace reveal">
+      <div class="vibespace-content">
+        <p class="eyebrow" style="color: var(--primary); margin-bottom: 12px;">Coming Soon</p>
+        <h2>Join the VibeSpace Waitlist</h2>
+        <p>Create an account to secure your spot. We’ll notify you when we launch.</p>
+
+        <!-- Waitlist Form -->
+        <div id="waitlistForm" style="max-width: 420px; margin: 40px auto 0; text-align: left;">
+          <div style="margin-bottom: 16px;">
+            <input type="email" id="email" placeholder="Email address" required
+              style="width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 1rem; outline: none;">
           </div>
-          <a href="#" class="btn btn-primary" onclick="alert('Waitlist will open soon. Stay tuned!')">Join the Waitlist</a>
+          <div style="margin-bottom: 16px;">
+            <input type="password" id="password" placeholder="Create password" required minlength="6"
+              style="width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 1rem; outline: none;">
+          </div>
+          <button id="joinBtn" class="btn btn-primary" style="width: 100%; padding: 15px;">
+            Join Waitlist
+          </button>
+          <p id="formMessage" style="margin-top: 16px; font-size: 0.95rem; text-align: center;"></p>
+        </div>
+
+        <!-- Success State (hidden by default) -->
+        <div id="successState" style="display: none; margin-top: 30px;">
+          <h3 style="color: var(--primary); margin-bottom: 10px;">You're on the list!</h3>
+          <p>Your account has been added to the waitlist.<br>Keep waiting — we’ll notify you when VibeSpace launches.</p>
         </div>
       </div>
     </div>
-  </section>
-
+  </div>
+</section>
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -688,5 +703,71 @@
     }, { threshold: 0.15 });
     reveals.forEach(el => observer.observe(el));
   </script>
+
+  <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script>
+  // Your Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBCm4PuaM2jBTguaUI3wW6D-IdqdEDuBdY",
+    authDomain: "vibespaces-waitlist.firebaseapp.com",
+    projectId: "vibespaces-waitlist",
+    storageBucket: "vibespaces-waitlist.firebasestorage.app",
+    messagingSenderId: "717979029154",
+    appId: "1:717979029154:web:1344517e5fb686b24c11fb"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // Waitlist Sign-up
+const joinBtn = document.getElementById('joinBtn');
+const formMessage = document.getElementById('formMessage');
+const waitlistForm = document.getElementById('waitlistForm');
+const successState = document.getElementById('successState');
+
+joinBtn.addEventListener('click', async () => {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  if (!email || !password) {
+    formMessage.style.color = '#ff6b6b';
+    formMessage.textContent = 'Please fill in both fields.';
+    return;
+  }
+
+  if (password.length < 6) {
+    formMessage.style.color = '#ff6b6b';
+    formMessage.textContent = 'Password must be at least 6 characters.';
+    return;
+  }
+
+  joinBtn.disabled = true;
+  joinBtn.textContent = 'Joining...';
+
+  try {
+    await auth.createUserWithEmailAndPassword(email, password);
+    
+    // Success
+    waitlistForm.style.display = 'none';
+    successState.style.display = 'block';
+  } catch (error) {
+    joinBtn.disabled = false;
+    joinBtn.textContent = 'Join Waitlist';
+    formMessage.style.color = '#ff6b6b';
+
+    if (error.code === 'auth/email-already-in-use') {
+      formMessage.textContent = 'This email is already on the waitlist.';
+    } else if (error.code === 'auth/invalid-email') {
+      formMessage.textContent = 'Please enter a valid email address.';
+    } else {
+      formMessage.textContent = 'Something went wrong. Please try again.';
+    }
+  }
+});
+</script>
 </body>
 </html>
