@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vibe Cartel Inc. | Building the internet’s better corners</title>
-  <meta name="description" content="Vibe Cartel Inc. — Crafting digital experiences and building VibeSpace, a calm community for thoughts and conversations." />
+  <meta name="description" content="Vibe Cartel Inc. — Crafting digital experiences: Harmony Perfumes, Axion Desk, and VibeSpaces, all live and growing." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="icon" href="image.png">
@@ -360,7 +360,7 @@
     }
     .project-card:hover {
       transform: translateY(-8px);
-      border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+      border-color: color-mix(in srgb, var(--card-accent, var(--primary)) 40%, transparent);
       box-shadow: 0 25px 50px rgba(0,0,0,0.15);
     }
     .project-image {
@@ -373,14 +373,16 @@
       font-size: 1.8rem;
       font-weight: 700;
       color: white;
+      letter-spacing: -0.02em;
     }
     .project-info { padding: 28px; }
     .project-tag {
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--primary);
+      color: var(--card-accent, var(--primary));
       margin-bottom: 10px;
+      font-weight: 600;
     }
     .project-info h3 {
       font-size: 1.4rem;
@@ -391,49 +393,247 @@
       font-size: 0.95rem;
       margin-bottom: 20px;
     }
+    .project-info .btn-outline:hover {
+      border-color: var(--card-accent, var(--primary));
+      color: var(--card-accent, var(--primary));
+    }
 
-    /* VibeSpace */
-    .vibespace {
+    /* Pulse / interactive section */
+    .pulse {
       background: var(--bg-elevated);
       border-radius: 32px;
       padding: 70px 50px;
-      text-align: center;
       border: 1px solid var(--border);
       position: relative;
       overflow: hidden;
     }
-    .vibespace::before {
+    .pulse::before {
       content: '';
       position: absolute;
       inset: 0;
       background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 60%);
     }
-    .vibespace-content { position: relative; z-index: 2; }
-    .vibespace h2 {
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      margin-bottom: 16px;
+    .pulse-content { position: relative; z-index: 2; }
+    .pulse-header { text-align: center; max-width: 560px; margin: 0 auto 50px; }
+    .pulse-header h2 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 16px; }
+    .pulse-header p { color: var(--text-muted); font-size: 1.1rem; }
+
+    .pulse-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 720px;
+      margin: 0 auto 60px;
     }
-    .vibespace p {
-      color: var(--text-muted);
-      max-width: 520px;
-      margin: 0 auto 36px;
-      font-size: 1.1rem;
+    .pulse-stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px 16px;
+      text-align: center;
     }
-    .feature-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      margin-bottom: 40px;
+    .pulse-stat .num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      margin-bottom: 6px;
     }
-    .pill {
-      padding: 8px 18px;
+    .pulse-stat .lbl { font-size: 0.85rem; color: var(--text-muted); }
+
+    .pulse-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (max-width: 800px) { .pulse-grid { grid-template-columns: 1fr; } }
+
+    /* Vibe-O-Meter */
+    .meter-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+    }
+    .meter-card h3 { font-size: 1.2rem; margin-bottom: 6px; }
+    .meter-card .sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 22px; }
+    .meter-track {
+      height: 14px;
       border-radius: 100px;
-      background: color-mix(in srgb, var(--primary) 12%, transparent);
-      color: var(--primary);
-      font-size: 0.9rem;
-      font-weight: 500;
+      background: linear-gradient(90deg, #3b82f6, #a78bfa, #f0abfc, #fb923c);
+      position: relative;
+      margin-bottom: 18px;
     }
+    #vibeSlider {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 14px;
+      background: transparent;
+      position: relative;
+      top: -14px;
+      margin: 0;
+      cursor: pointer;
+    }
+    #vibeSlider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--text);
+      cursor: grab;
+    }
+    #vibeSlider::-moz-range-thumb {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--text);
+      cursor: grab;
+    }
+    #vibeReadout {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      min-height: 1.4em;
+    }
+
+    /* Talk to us */
+    .talk-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+    }
+    .talk-card h3 { font-size: 1.2rem; margin-bottom: 6px; display: flex; align-items: center; gap: 9px; }
+    .talk-card .sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 18px; }
+    .talk-note { color: var(--text-muted); font-size: 0.76rem; margin-top: 12px; text-align: center; }
+    .talk-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+      animation: dotPulse 2s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes dotPulse {
+      0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+      70% { box-shadow: 0 0 0 7px rgba(52, 211, 153, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+    }
+    .talk-typing {
+      display: flex;
+      gap: 4px;
+      padding: 0 2px 10px;
+    }
+    .talk-typing span {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--text-muted);
+      animation: typingBlink 1.1s infinite ease-in-out;
+    }
+    .talk-typing span:nth-child(2) { animation-delay: 0.15s; }
+    .talk-typing span:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes typingBlink {
+      0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
+      30% { opacity: 1; transform: translateY(-3px); }
+    }
+    .talk-log {
+      flex: 1;
+      min-height: 130px;
+      max-height: 180px;
+      overflow-y: auto;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+      font-family: 'Syne', sans-serif;
+    }
+    .talk-log p { margin-bottom: 10px; line-height: 1.5; }
+    .talk-log .from-us { color: var(--primary); }
+    .talk-log .from-you { color: var(--text-muted); }
+    .talk-row { display: flex; gap: 10px; }
+    .talk-row input {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+      font-family: inherit;
+    }
+    .talk-row button {
+      padding: 12px 20px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    /* Patrons */
+.patrons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+.patron-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 30px 24px;
+  text-align: center;
+  transition: all 0.35s ease;
+}
+.patron-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--patron-accent, var(--primary)) 45%, transparent);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+.patron-avatar {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: white;
+  background: var(--patron-gradient, var(--gradient));
+}
+.patron-card h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+.patron-role {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--patron-accent, var(--primary)) 14%, transparent);
+  color: var(--patron-accent, var(--primary));
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.patron-card p.blurb {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  .patrons-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+}
 
     /* Footer */
     .footer {
@@ -477,7 +677,8 @@
       .hamburger { display: flex; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .stats { gap: 24px; }
-      .vibespace { padding: 50px 28px; }
+      .pulse { padding: 50px 22px; }
+      .pulse-stats { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -490,11 +691,11 @@
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#work">Work</a></li>
-        <li><a href="#vibespace">VibeSpace</a></li>
+        <li><a href="#pulse">Connect</a></li>
       </ul>
       <div class="nav-right">
         <button class="theme-toggle" id="themeToggle" title="Switch theme">◐</button>
-        <a href="#vibespace" class="btn btn-primary">Join Waitlist</a>
+        <a href="#pulse" class="btn btn-primary">Say Hi 👋</a>
         <button class="hamburger" id="hamburger">
           <span></span><span></span><span></span>
         </button>
@@ -506,8 +707,8 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#about">About</a>
     <a href="#work">Work</a>
-    <a href="#vibespaces">VibeSpaces</a>
-    <a href="#vibespaces" class="btn btn-primary" style="margin-top: 20px;">Join Vibespaces</a>
+    <a href="#pulse">Connect</a>
+    <a href="#pulse" class="btn btn-primary" style="margin-top: 20px;">Say Hi 👋</a>
   </div>
 
   <!-- Hero -->
@@ -517,10 +718,10 @@
       <div class="hero-content reveal">
         <p class="hero-eyebrow">Vibe Cartel Inc.</p>
         <h1>Building the internet’s <span>better corners</span></h1>
-        <p>We craft digital experiences that feel alive — and we’re building a calm space for people to share thoughts, stories, and advice.</p>
+        <p>We craft digital experiences that feel alive — from a fragrance shop to an AI-assisted trading desk to a community for honest conversations. All three are live right now.</p>
         <div class="hero-buttons">
           <a href="#work" class="btn btn-primary">See Our Work</a>
-          <a href="#vibespaces" class="btn btn-outline">Discover VibeSpaces</a>
+          <a href="#pulse" class="btn btn-outline">Feel the Vibe</a>
         </div>
       </div>
     </div>
@@ -542,7 +743,7 @@
               <span class="stat-label">Founded</span>
             </div>
             <div>
-              <span class="stat-number">3</span>
+              <span class="stat-number">4</span>
               <span class="stat-label">Products</span>
             </div>
             <div>
@@ -565,13 +766,35 @@
     <div class="section-header reveal">
       <p class="eyebrow">Selected Work</p>
       <h2>Things we’ve built</h2>
-      <p>A growing collection of digital products and experiences.</p>
+      <p>A growing collection of digital products and experiences — all shipped, all live.</p>
     </div>
 
     <div class="projects-grid">
 
+      <!-- Axion Desk -->
+      <article class="project-card reveal" style="--card-accent:#10b981;">
+        <div class="project-image" style="background: linear-gradient(135deg, #052e2b, #10b981);">Axion Desk</div>
+        <div class="project-info">
+          <p class="project-tag">Just Launched</p>
+          <h3>Axion Desk</h3>
+          <p>An AI-assisted trading journal — log trades, track P&L, get honest reviews from Axion AI, and share setups on The Floor.</p>
+          <a href="https://vibeportalshop.github.io/axiondesk/" target="_blank" class="btn btn-outline" style="padding: 9px 20px; font-size: 0.9rem;">Visit Site →</a>
+        </div>
+      </article>
+
+      <!-- VibeSpace -->
+      <article class="project-card reveal" style="--card-accent:#f0abfc;">
+        <div class="project-image" style="background: linear-gradient(135deg, #4c1d95, #9d174d);">VibeSpaces</div>
+        <div class="project-info">
+          <p class="project-tag">Live Now</p>
+          <h3>VibeSpaces</h3>
+          <p>A free community platform where people share thoughts, advice, and stories — and connect through honest conversation. Launched and open to everyone.</p>
+          <a href="https://vibeportalshop.github.io/vibespaces-web/" target="_blank" class="btn btn-outline" style="padding: 9px 20px; font-size: 0.9rem;">Visit Site →</a>
+        </div>
+      </article>
+
       <!-- Harmony -->
-      <article class="project-card reveal">
+      <article class="project-card reveal" style="--card-accent:#c4b5fd;">
         <div class="project-image">HARMONY</div>
         <div class="project-info">
           <p class="project-tag">Fragrance Brand</p>
@@ -581,19 +804,8 @@
         </div>
       </article>
 
-      <!-- VibeSpace -->
-      <article class="project-card reveal">
-        <div class="project-image" style="background: linear-gradient(135deg, #4c1d95, #9d174d);">VibeSpaces</div>
-        <div class="project-info">
-          <p class="project-tag">Just Opened</p>
-          <h3>VibeSpaces</h3>
-          <p>A FREE FOR ALL community platform where people can share thoughts, advice, and stories — and connect through meaningful conversations.</p>
-          <a href="#vibespaces" class="btn btn-outline" style="padding: 9px 20px; font-size: 0.9rem;">Learn More →</a>
-        </div>
-      </article>
-
       <!-- Synergy -->
-      <article class="project-card reveal">
+      <article class="project-card reveal" style="--card-accent:#60a5fa;">
         <div class="project-image" style="background: linear-gradient(135deg, #1e3a5f, #0f172a);">SYNERGY</div>
         <div class="project-info">
           <p class="project-tag">Past Project</p>
@@ -605,38 +817,101 @@
 
     </div>
   </div>
-</section> 
-  <!-- VibeSpace Waitlist -->
-<section id="vibespaces" class="section">
-  <div class="container">
-    <div class="vibespace reveal">
-      <div class="vibespace-content">
-        <p class="eyebrow" style="color: var(--primary); margin-bottom: 12px;">Just Opened</p>
-        <h2>Join the VibeSpace community</h2>
-        <p>Create an account to secure your spot.</p>
+</section>
 
-        <!-- Waitlist Form -->
-        <div id="waitlistForm" style="max-width: 420px; margin: 40px auto 0; text-align: left;">
-          <div style="margin-bottom: 16px;">
-            <input type="email" id="email" placeholder="Email address" required
-              style="width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 1rem; outline: none;">
-          </div>
-          <div style="margin-bottom: 16px;">
-            <input type="password" id="password" placeholder="Create password" required minlength="6"
-              style="width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 1rem; outline: none;">
-          </div>
-          <button id="joinBtn" href="https://vibeportalshop.github.io/vibespaces-web/" class="btn btn-primary" style="width: 100%; padding: 15px;">
-            Create a account
-          </button>
-          <p id="formMessage" style="margin-top: 16px; font-size: 0.95rem; text-align: center;"></p>
+  <!-- Vibe Pulse -->
+<section id="pulse" class="section">
+  <div class="container">
+    <div class="pulse reveal">
+      <div class="pulse-content">
+        <div class="pulse-header">
+          <p class="eyebrow" style="color: var(--primary); margin-bottom: 12px;">The Vibe Pulse</p>
+          <h2>A little live corner of Vibe Cartel</h2>
+          <p>No waitlists here — just a feel for what's happening across our products, and a place to say hi.</p>
         </div>
 
-        <!-- Success State (hidden by default) -->
-        <div id="successState" style="display: none; margin-top: 30px;">
-          <h3 style="color: var(--primary); margin-bottom: 10px;">You're on the list!</h3>
-          <p>Your account has been added to the waitlist.<br>Keep waiting — we’ll notify you when VibeSpace launches.</p>
+        <div class="pulse-stats">
+          <div class="pulse-stat"><span class="num" id="statTrades">0</span><span class="lbl">Trades logged today · Axion Desk</span></div>
+          <div class="pulse-stat"><span class="num" id="statVibes">0</span><span class="lbl">Conversations live · VibeSpaces</span></div>
+          <div class="pulse-stat"><span class="num" id="statIdeas">0</span><span class="lbl">Ideas on the whiteboard</span></div>
+        </div>
+
+        <div class="pulse-grid">
+          <div class="meter-card">
+            <h3>The Vibe-Meter</h3>
+            <p class="sub">Drag it. See where your head's at today.</p>
+            <div class="meter-track">
+              <input type="range" id="vibeSlider" min="0" max="100" value="50">
+            </div>
+            <p id="vibeReadout">😌 Chill and steady.</p>
+          </div>
+
+          <div class="talk-card">
+            <h3><span class="talk-dot"></span> Ask the Desk</h3>
+            <p class="sub">Our front-of-house script. Ask about the products, the team, or just say hi.</p>
+            <div class="talk-log" id="talkLog">
+              <p class="from-us"><strong>The Desk:</strong> Hey! I'm the little script that sits at the front door of Vibe Cartel. Ask me about Axion Desk, VibeSpaces, Harmony, working with us — or just say hi.</p>
+            </div>
+            <div class="talk-typing" id="talkTyping" style="display:none;"><span></span><span></span><span></span></div>
+            <div class="talk-row">
+              <input type="text" id="talkInput" placeholder="Say something…" maxlength="140">
+              <button class="btn btn-primary" id="talkSend">Send</button>
+            </div>
+            <p class="talk-note">This is a scripted assistant for your convenience, not a live line to the team. But our team goes through your conversations once online.</p>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Patrons -->
+<section id="patrons" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">Our Patrons</p>
+      <h2>The people behind the vibe</h2>
+      <p>Believers who back us with funding, ideas, and the occasional 2 AM "what if" call.</p>
+    </div>
+
+    <div class="patrons-grid">
+
+      <div class="patron-card reveal" style="--patron-accent:#a78bfa; --patron-gradient: linear-gradient(135deg, #7c3aed, #a78bfa);">
+        <div class="patron-avatar">AS</div>
+        <h4>Aditya Shelke</h4>
+        <p class="patron-role">CEO & Ambassador</p>
+        <p class="blurb">The founder of this empire.</p>
+      </div>
+
+      <div class="patron-card reveal" style="--patron-accent:#f0abfc; --patron-gradient: linear-gradient(135deg, #db2777, #f0abfc);">
+        <div class="patron-avatar">SM</div>
+        <h4>Shreyansh Mishra</h4>
+        <p class="patron-role">Funding & Ideas
+        </p>
+        <p class="blurb">Person with his money on stake.</p>
+      </div>
+
+      <div class="patron-card reveal" style="--patron-accent:#10b981; --patron-gradient: linear-gradient(135deg, #047857, #10b981);">
+        <div class="patron-avatar">RK</div>
+        <h4>Rhea Kapoor</h4>
+        <p class="patron-role">Code & Development</p>
+        <p class="blurb">Her keyboard is all messed up by coding this stuff.</p>
+      </div>
+
+      <div class="patron-card reveal" style="--patron-accent:#60a5fa; --patron-gradient: linear-gradient(135deg, #1d4ed8, #60a5fa);">
+        <div class="patron-avatar">GH</div>
+        <h4>GitHub Organisation</h4>
+        <p class="patron-role">Domains & Hosting</p>
+        <p class="blurb">These web pages won't be in reach to you without them.</p>
+      </div>
+
+      <div class="patron-card reveal" style="--patron-accent:#fb923c; --patron-gradient: linear-gradient(135deg, #c2410c, #fb923c);">
+        <div class="patron-avatar">AB</div>
+        <h4>Aarav Bajaj</h4>
+        <p class="patron-role">Design & Editor</p>
+        <p class="blurb">Our youtube channel has been handled by him lately.</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -651,7 +926,7 @@
         <div class="footer-links">
           <a href="#about">About</a>
           <a href="#work">Work</a>
-          <a href="#vibespace">VibeSpace</a>
+          <a href="#pulse">Connect</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -702,72 +977,259 @@
       });
     }, { threshold: 0.15 });
     reveals.forEach(el => observer.observe(el));
-  </script>
 
-  <!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-
-<script>
-  // Your Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyBCm4PuaM2jBTguaUI3wW6D-IdqdEDuBdY",
-    authDomain: "vibespaces-waitlist.firebaseapp.com",
-    projectId: "vibespaces-waitlist",
-    storageBucket: "vibespaces-waitlist.firebasestorage.app",
-    messagingSenderId: "717979029154",
-    appId: "1:717979029154:web:1344517e5fb686b24c11fb"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-
-  // Waitlist Sign-up
-const joinBtn = document.getElementById('joinBtn');
-const formMessage = document.getElementById('formMessage');
-const waitlistForm = document.getElementById('waitlistForm');
-const successState = document.getElementById('successState');
-
-joinBtn.addEventListener('click', async () => {
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-
-  if (!email || !password) {
-    formMessage.style.color = '#ff6b6b';
-    formMessage.textContent = 'Please fill in both fields.';
-    return;
-  }
-
-  if (password.length < 6) {
-    formMessage.style.color = '#ff6b6b';
-    formMessage.textContent = 'Password must be at least 6 characters.';
-    return;
-  }
-
-  joinBtn.disabled = true;
-  joinBtn.textContent = 'Joining...';
-
-  try {
-    await auth.createUserWithEmailAndPassword(email, password);
-    
-    // Success
-    waitlistForm.style.display = 'none';
-    successState.style.display = 'block';
-  } catch (error) {
-    joinBtn.disabled = false;
-    joinBtn.textContent = 'Join Waitlist';
-    formMessage.style.color = '#ff6b6b';
-
-    if (error.code === 'auth/email-already-in-use') {
-      formMessage.textContent = 'This email is already on the waitlist.';
-    } else if (error.code === 'auth/invalid-email') {
-      formMessage.textContent = 'Please enter a valid email address.';
-    } else {
-      formMessage.textContent = 'Something went wrong. Please try again.';
+    // Vibe Pulse — live-ish stat counters
+    function animateCount(el, target, duration) {
+      const start = 0;
+      const startTime = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(start + (target - start) * eased);
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     }
-  }
-});
-</script>
+
+    const statEls = {
+      trades: document.getElementById('statTrades'),
+      vibes: document.getElementById('statVibes'),
+      ideas: document.getElementById('statIdeas')
+    };
+    let pulseStarted = false;
+    const pulseSection = document.getElementById('pulse');
+    const pulseObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !pulseStarted) {
+          pulseStarted = true;
+          animateCount(statEls.trades, 128, 1400);
+          animateCount(statEls.vibes, 342, 1600);
+          animateCount(statEls.ideas, 27, 1200);
+          // gentle live tick after the initial count-up, so it never feels static
+          setInterval(() => {
+            statEls.trades.textContent = parseInt(statEls.trades.textContent) + Math.floor(Math.random() * 2);
+            if (Math.random() > 0.5) {
+              statEls.vibes.textContent = parseInt(statEls.vibes.textContent) + 1;
+            }
+          }, 5000);
+        }
+      });
+    }, { threshold: 0.3 });
+    pulseObserver.observe(pulseSection);
+
+    // Vibe-O-Meter
+    const vibeSlider = document.getElementById('vibeSlider');
+    const vibeReadout = document.getElementById('vibeReadout');
+    const vibeMessages = [
+      [0, '😴 Barely awake. Coffee incoming.'],
+      [15, '🥱 Low battery, high hopes.'],
+      [30, '🙂 Getting there, slowly.'],
+      [50, '😌 Chill and steady.'],
+      [65, '⚡ Getting some real momentum.'],
+      [80, '🔥 Locked in. Don\u2019t interrupt.'],
+      [92, '🚀 Full send. Ship it.'],
+      [101, '🌌 Off the charts. Are you okay?']
+    ];
+    function updateVibe(val) {
+      let msg = vibeMessages[0][1];
+      for (const [threshold, text] of vibeMessages) {
+        if (val >= threshold) msg = text;
+      }
+      vibeReadout.textContent = msg;
+      const hue = 210 + (val / 100) * 120; // blue -> pink/orange
+      vibeReadout.style.color = `hsl(${hue}, 80%, 65%)`;
+    }
+    vibeSlider.addEventListener('input', (e) => updateVibe(parseInt(e.target.value)));
+    updateVibe(50);
+
+    // Ask the Desk — a much wider scripted front-of-house assistant
+    const talkLog = document.getElementById('talkLog');
+    const talkInput = document.getElementById('talkInput');
+    const talkSend = document.getElementById('talkSend');
+    const talkTyping = document.getElementById('talkTyping');
+
+    // Each entry: intent name, patterns to match, and a pool of replies (one picked at random, avoiding immediate repeats)
+    const intents = [
+      {
+        name: 'owner',
+        match: /\bowner\b|founder|ceo|talk to (a |the )?(real |actual )?(person|human)|is anyone real|real human|actual person/i,
+        replies: [
+          "I'm just the scripted front door — no live human behind me right now. But I hear you, and \"can I talk to the owner\" is easily our most-asked question. Say what's on your mind and I'll treat it like a note left on the desk.",
+          "Fair question — I'm a little script, not a person. There's no live chat behind this yet, but the team does read through what gets typed here from time to time. What would you want to tell them?",
+          "No human on the other end of this one, sorry! I'm just a front-of-house script. If it's something real — a collab, a bug, a job pitch — the founders do go through this log, so type away."
+        ]
+      },
+      {
+        name: 'greeting',
+        match: /^(hi|hello|hey|yo|sup|hola|namaste)\b/i,
+        replies: [
+          "Hey there! 👋 Good to see you poking around the site.",
+          "Hi! Welcome to the Vibe Cartel desk. What can I point you toward?",
+          "Hey — nice of you to say hi to a script. What's up?"
+        ]
+      },
+      {
+        name: 'axion',
+        match: /axion|trad(e|ing)|p&?l|stock market/i,
+        replies: [
+          "Axion Desk is live — it's where traders log their day, track P&L, and get an honest (sometimes blunt) review from Axion AI. Worth a look if you trade.",
+          "That's our trading journal — Axion Desk. Private by default, with an opt-in community layer called The Floor if you ever want to share a setup.",
+          "Axion Desk just shipped a few weeks ago. Daily/weekly desks, win-rate tracking, and an AI that reviews your trades without sugarcoating."
+        ]
+      },
+      {
+        name: 'vibespaces',
+        match: /vibespace|community|conversation|share (a )?thought/i,
+        replies: [
+          "VibeSpaces is our free community space — open to everyone now, no waitlist. Come share something real.",
+          "That's VibeSpaces — a calm corner for thoughts, stories, and honest advice. Fully launched, no invite needed.",
+          "VibeSpaces went live recently. It's the least corporate corner of the internet we could build."
+        ]
+      },
+      {
+        name: 'harmony',
+        match: /harmony|perfume|fragrance|scent/i,
+        replies: [
+          "Harmony Perfumes was our first real ship — a full storefront with a fragrance finder. Still proud of that one.",
+          "That's our fragrance brand, Harmony Perfumes. Product pages, a scent finder, seasonal collections — the whole thing."
+        ]
+      },
+      {
+        name: 'synergy',
+        match: /synergy|marketing agency|seo/i,
+        replies: [
+          "Synergy was an earlier project — a marketing agency concept focused on SEO and client acquisition. It's more of a portfolio piece these days.",
+        ]
+      },
+      {
+        name: 'hire',
+        match: /job|hire|hiring|work with|collab|freelance|opportunit(y|ies)|partner(ship)?/i,
+        replies: [
+          "We love hearing that. Type out what you have in mind — project, role, partnership — and it'll sit in the log for the team to see.",
+          "Always up for a good collab. Drop the details here and someone will pick it up.",
+          "Interesting — go ahead and describe it. We're a small team, so real pitches don't get lost in the noise."
+        ]
+      },
+      {
+        name: 'praise',
+        match: /love (it|this)|great|awesome|amazing|cool site|nice work|beautiful|good job|impressive/i,
+        replies: [
+          "Appreciate that! A lot of late nights and chai went into this.",
+          "That means a lot — small team, big effort. Thank you!",
+          "😊 We'll take it. Feel free to poke around the rest of the site too."
+        ]
+      },
+      {
+        name: 'complaint',
+        match: /bug|broken|not working|issue|error|glitch|problem/i,
+        replies: [
+          "Sorry about that — tell me a bit more about what's going wrong and it'll get flagged.",
+          "Ugh, noted. What page or product is acting up?",
+          "Thanks for flagging it. We're a small team so bug reports genuinely help — go ahead and describe it."
+        ]
+      },
+      {
+        name: 'price',
+        match: /price|cost|budget|free|pricing|how much/i,
+        replies: [
+          "We keep things lean and mostly free-tier on our end. Reach out with specifics and we'll be straight with you about cost.",
+          "Depends what you're asking about — our own products are free to use right now. For custom work, tell me more."
+        ]
+      },
+      {
+        name: 'whatis',
+        match: /who are you|what are you|are you (an? )?(ai|bot|real)/i,
+        replies: [
+          "I'm a small scripted assistant sitting on the homepage — pattern-matching, not a real AI model. Just here to point you in the right direction.",
+          "Just a front-of-house script, not a real AI. I know our products well though, so ask away."
+        ]
+      },
+      {
+        name: 'thanks',
+        match: /thank|thanks|thx|ty\b/i,
+        replies: [
+          "Anytime! 👋",
+          "You're welcome — enjoy the site.",
+          "No problem at all."
+        ]
+      },
+      {
+        name: 'bye',
+        match: /bye|goodbye|see ya|later|cya/i,
+        replies: [
+          "See you around! 👋",
+          "Take care — come back anytime.",
+          "Bye for now!"
+        ]
+      }
+    ];
+
+    const fallbacks = [
+      "Noted — that's going into the log.",
+      "Got it. What else is on your mind?",
+      "Fair point, I'll leave that where the team can see it.",
+      "That's going straight into the whiteboard pile.",
+      "Interesting. Anything else you want to ask about the products?",
+      "Hmm, I don't have a scripted line for that one — but I've logged it."
+    ];
+
+    let lastFallback = -1;
+    let lastIntentReply = {};
+
+    function pickVaried(pool, memoKey) {
+      if (pool.length === 1) return pool[0];
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * pool.length);
+      } while (idx === lastIntentReply[memoKey] && pool.length > 1);
+      lastIntentReply[memoKey] = idx;
+      return pool[idx];
+    }
+
+    function pickFallback() {
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * fallbacks.length);
+      } while (idx === lastFallback && fallbacks.length > 1);
+      lastFallback = idx;
+      return fallbacks[idx];
+    }
+
+    function addLine(cls, who, text) {
+      const p = document.createElement('p');
+      p.className = cls;
+      p.innerHTML = `<strong>${who}:</strong> ${text}`;
+      talkLog.appendChild(p);
+      talkLog.scrollTop = talkLog.scrollHeight;
+    }
+
+    function respondTo(msg) {
+      for (const intent of intents) {
+        if (intent.match.test(msg)) return pickVaried(intent.replies, intent.name);
+      }
+      return pickFallback();
+    }
+
+    function sendTalk() {
+      const val = talkInput.value.trim();
+      if (!val) return;
+      addLine('from-you', 'You', val);
+      talkInput.value = '';
+      talkSend.disabled = true;
+      talkTyping.style.display = 'flex';
+      talkLog.scrollTop = talkLog.scrollHeight;
+      const delay = 500 + Math.random() * 500;
+      setTimeout(() => {
+        talkTyping.style.display = 'none';
+        addLine('from-us', 'The Desk', respondTo(val));
+        talkSend.disabled = false;
+        talkInput.focus();
+      }, delay);
+    }
+    talkSend.addEventListener('click', sendTalk);
+    talkInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendTalk();
+    });
+  </script>
 </body>
 </html>
