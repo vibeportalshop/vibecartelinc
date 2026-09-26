@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Vibe Cartel Dev</title>
+<title>Vibe Cartel Web</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="icon" href="2.png">
 <style>
   :root{
     --ink:#14161a; --ink2:#1d2026; --paper:#f1ede4; --paper-dim:#c9c3b4;
@@ -42,14 +41,14 @@
   header,.hero,section,footer{position:relative; z-index:1;}
   @media (prefers-reduced-motion: reduce){ body::after{animation:none;} }
   h1,h2,.mark{font-family:'Archivo Black',system-ui,sans-serif; font-weight:400; letter-spacing:-0.01em;}
-  .wrap{max-width:760px; margin:0 auto; padding:0 28px;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 clamp(16px,5vw,28px);}
   header{padding:22px 0; border-bottom:1px solid #2a2d34;}
   header .wrap{display:flex; justify-content:space-between; align-items:center;}
   .brand{font-family:'Archivo Black'; font-size:15px; color:var(--paper);}
   .brand span{color:var(--amber);}
   nav a{color:var(--paper-dim); text-decoration:none; font-size:14px; margin-left:22px;}
   nav a:hover{color:var(--amber);}
-  .hero{padding:78px 0 60px;}
+  .hero{padding-top:78px; padding-bottom:60px;}
   .hero h1{font-size:clamp(34px,7vw,56px); line-height:1.08; max-width:11ch;}
   .hero h1 em{font-style:normal; color:var(--amber);}
   .hero p{margin-top:22px; max-width:46ch; color:var(--paper-dim); font-size:17px;}
@@ -68,8 +67,8 @@
   .work{display:grid; gap:14px;}
   .card{border:1px solid #2a2d34; border-radius:4px; padding:18px 20px; background:var(--ink2); cursor:pointer; transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;}
   .card:hover{transform:translateY(-3px); border-color:var(--amber-dim); box-shadow:0 10px 24px -12px rgba(0,0,0,.6);}
-  .card .t{font-weight:600; font-size:15.5px; display:flex; justify-content:space-between; align-items:center;}
-  .card .t .chev{color:var(--amber); font-size:13px; transition:transform .22s ease;}
+  .card .t{font-weight:600; font-size:15.5px; display:flex; justify-content:space-between; align-items:center; gap:10px;}
+  .card .t .chev{color:var(--amber); font-size:13px; transition:transform .22s ease; flex:none;}
   .card.open .t .chev{transform:rotate(90deg);}
   .card .d{color:var(--paper-dim); font-size:14px; margin-top:4px;}
   .card .more{max-height:0; overflow:hidden; transition:max-height .28s ease, margin-top .28s ease;}
@@ -77,17 +76,17 @@
   .card .more p{color:var(--paper-dim); font-size:13.5px; padding-top:10px; border-top:1px solid #2a2d34;}
   .card .visit{display:inline-block; margin-top:10px; color:var(--amber); font-size:13.5px; font-weight:600; text-decoration:none;}
   .card .visit:hover{text-decoration:underline;}
-
+ 
   .pkg{border:1px solid #2a2d34; border-radius:4px; padding:22px 24px; background:var(--ink2); margin-bottom:16px; cursor:pointer; transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease; position:relative;}
   .pkg:hover{transform:translateY(-3px); border-color:var(--amber-dim); box-shadow:0 10px 24px -12px rgba(0,0,0,.6);}
   .pkg.rec{border-color:var(--amber);}
   .pkg .badge{position:absolute; top:-11px; right:20px; background:var(--amber); color:var(--ink); font-size:11.5px; font-weight:600; padding:3px 10px; border-radius:20px;}
-  .pkg .head{display:flex; justify-content:space-between; align-items:flex-start; gap:12px;}
+  .pkg .head{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;}
   .pkg .name{font-weight:600; font-size:17px; display:flex; align-items:center; gap:8px;}
-  .pkg .name .chev{color:var(--amber); font-size:13px; transition:transform .22s ease;}
+  .pkg .name .chev{color:var(--amber); font-size:13px; transition:transform .22s ease; flex:none;}
   .pkg.open .name .chev{transform:rotate(90deg);}
   .pkg .tag{color:var(--paper-dim); font-size:14px; margin-top:4px; max-width:34ch;}
-  .pkg .costs{text-align:right; flex:none;}
+  .pkg .costs{text-align:right; flex:none; margin-left:auto;}
   .pkg .costs .b{font-family:'Archivo Black'; color:var(--amber); font-size:17px;}
   .pkg .costs .h{color:var(--paper-dim); font-size:12.5px; margin-top:2px;}
   .pkg .detail{max-height:0; overflow:hidden; transition:max-height .32s ease, margin-top .32s ease;}
@@ -95,20 +94,46 @@
   .pkg .detail ul{list-style:none; border-top:1px solid #2a2d34; padding-top:12px;}
   .pkg .detail li{font-size:13.5px; color:var(--paper-dim); padding:4px 0; display:flex; gap:8px;}
   .pkg .detail li:before{content:"—"; color:var(--amber-dim); flex:none;}
-  .pkg .detail .split{display:flex; justify-content:space-between; border-top:1px solid #2a2d34; margin-top:10px; padding-top:10px; font-size:13.5px;}
-  .pkg .detail .split span:last-child{color:var(--paper);}
+  .pkg .detail .split{display:flex; justify-content:space-between; gap:10px; border-top:1px solid #2a2d34; margin-top:10px; padding-top:10px; font-size:13.5px;}
+  .pkg .detail .split span:last-child{color:var(--paper); text-align:right;}
   footer{padding:44px 0 60px;}
   footer p{color:var(--paper-dim); font-size:14.5px;}
   footer .btn{margin-top:18px;}
   .fineprint{margin-top:30px; color:#5c5f66; font-size:12.5px;}
   @media(max-width:520px){nav{display:none;}}
+ 
+  @media(max-width:480px){
+    .pkg .head{flex-direction:column;}
+    .pkg .costs{text-align:left; margin-left:0; margin-top:10px;}
+    .pkg .badge{top:-11px; right:16px;}
+    .price .row, .breakdown li, .pkg .detail .split{flex-wrap:wrap;}
+  }
+ 
+  @media(max-width:380px){
+    .hero{padding-top:56px; padding-bottom:44px;}
+    section{padding:40px 0;}
+    section h2{font-size:22px;}
+    .btnrow{flex-direction:column; align-items:stretch;}
+    .btn{text-align:center;}
+  }
+ 
+  /* short/landscape phones */
+  @media(max-height:480px) and (orientation:landscape){
+    .hero{padding-top:40px; padding-bottom:32px;}
+    section{padding:32px 0;}
+    body::after{animation-duration:34s;}
+  }
+ 
+  @media(min-width:900px){
+    .wrap{max-width:820px;}
+  }
 </style>
 </head>
 <body>
-
+ 
 <header>
   <div class="wrap">
-    <div class="brand">VIBE <span>CARTEL</span> DEV</div>
+    <div class="brand">VIBE <span>CARTEL</span> WEB</div>
     <nav>
       <a href="#work">Work</a>
       <a href="#process">Process</a>
@@ -116,7 +141,7 @@
     </nav>
   </div>
 </header>
-
+ 
 <div class="hero wrap">
   <h1>Websites for shops that don't have one <em>yet.</em></h1>
   <p>The web dev branch of Vibe Cartel Inc. We build simple, fast, working websites for small businesses — no jargon, no bloated quotes, no six-week timelines. Three packages, pick what fits.</p>
@@ -125,7 +150,7 @@
     <a class="btn ghost" href="#work">See the work</a>
   </div>
 </div>
-
+ 
 <section id="process">
   <div class="wrap">
     <div class="eyebrow">How it works</div>
@@ -146,7 +171,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="work">
   <div class="wrap">
     <div class="eyebrow">Past & in-progress</div>
@@ -170,12 +195,12 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="pricing">
   <div class="wrap">
     <div class="eyebrow">Pricing</div>
     <h2>Pick a package. Tap it to see what's inside.</h2>
-
+ 
     <div class="pkg" onclick="this.classList.toggle('open')">
       <div class="head">
         <div>
@@ -197,7 +222,7 @@
         <div class="split"><span>Hosting & maintenance</span><span>₹100/mo</span></div>
       </div>
     </div>
-
+ 
     <div class="pkg rec" onclick="this.classList.toggle('open')">
       <div class="badge">Most picked</div>
       <div class="head">
@@ -220,7 +245,7 @@
         <div class="split"><span>Hosting & maintenance</span><span>₹125/mo</span></div>
       </div>
     </div>
-
+ 
     <div class="pkg" onclick="this.classList.toggle('open')">
       <div class="head">
         <div>
@@ -241,11 +266,11 @@
         <div class="split"><span>Hosting & maintenance</span><span>₹150–200/mo</span></div>
       </div>
     </div>
-
+ 
     <p class="fineprint">Free demo built first, always — you only pay once you've seen it working. Tap a package to see what's included.</p>
   </div>
 </section>
-
+ 
 <footer>
   <div class="wrap">
     <div class="eyebrow">Get in touch</div>
@@ -254,6 +279,7 @@
     <p class="fineprint">Developed and distributed by <a href="https://vibeportalshop.github.io/vibecartelinc/" style="color:inherit; text-decoration:underline;" target="_blank" rel="noopener">Vibe Cartel Inc.</a></p>
   </div>
 </footer>
-
+ 
 </body>
 </html>
+ 
